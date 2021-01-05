@@ -1,4 +1,5 @@
 ## Nest Event
+
 <p>
   <a href="https://www.npmjs.com/~nest-event" target="_blank"><img src="https://img.shields.io/npm/v/nest-event.svg"
       alt="NPM Version" /></a>
@@ -12,6 +13,7 @@
   <p >Event handler for <a href="http://nestjs.com" target="_blank">Nest.js</a> framework with decorators </p>
 
 ### Features
+
 - Communicate between modules without import
 - Organize event handlers with decorators
 - Work with multiple Event Emitters
@@ -21,7 +23,9 @@
 ```bash
 $ npm i --save nest-event
 ```
+
 ### Usage
+
 Import `NestEventModule` into your root module _(`AppModule`)_
 
 ```ts
@@ -51,7 +55,9 @@ import { Emitter } from './nest-event';
 @Emitter()
 export class MyEventEmitter extends EventEmitter {}
 ```
+
 You can provide multiple emitters with passing a name.
+
 ```ts
 @Emitter('ws-emitter')
 export class WebsocketClient extends Websocket {}
@@ -68,13 +74,13 @@ import { User } from './interfaces';
 
 @Injectable()
 export class EmailService {
-
   @On('user-created')
-  onUserCreated(user: User){
+  onUserCreated(user: User) {
     // send verification email
   }
 }
 ```
+
 If you have multiple emitters you can separate the handlers with `@From` decorator.
 
 ```ts
@@ -84,18 +90,17 @@ If you have multiple emitters you can separate the handlers with `@From` decorat
     // do something
   }
 ```
+
 #### Event Emitter
 
-To access your emitters in different modules, controllers etc. You can use  `NestEventEmitter`
+To access your emitters in different modules, controllers etc. You can use `NestEventEmitter`
 
 ```ts
 import { NestEventEmitter } from './nest-event';
 
 @Controller('user')
 export class UserController {
-  constructor(
-    private readonly nestEventEmitter: NestEventEmitter,
-    ) {}
+  constructor(private readonly nestEventEmitter: NestEventEmitter) {}
 
   @Post('signup')
   signup() {
@@ -104,32 +109,30 @@ export class UserController {
   }
 }
 ```
+
 If you provide multiple emitters you can select one with:
 
 ```ts
- this.nestEventEmitter.emitter('my-emitter').emit('user-created', user);
+this.nestEventEmitter.emitter('my-emitter').emit('user-created', user);
 ```
 
-Also, you can get your emitters as  <a href="https://github.com/bterlson/strict-event-emitter-types">StrictEventEmitter</a>
+Also, you can get your emitters as <a href="https://github.com/bterlson/strict-event-emitter-types">StrictEventEmitter</a>
 
 ```ts
 // define your events
- interface Events {
-   request: (request: Request, response: Response) => void;
-   done: void;
- }
- this.nestEventEmitter.strictEmitter<Events>().emit('done');
- //or
-  this.nestEventEmitter.strictEmitter<Events>('my-emitter').emit('done');
+interface Events {
+  request: (request: Request, response: Response) => void;
+  done: void;
+}
+this.nestEventEmitter.strictEmitter<Events>().emit('done');
+//or
+this.nestEventEmitter.strictEmitter<Events>('my-emitter').emit('done');
 ```
+
 ### Future Goals
 
-* Add tests;
-
+- Add tests;
 
 ### Contributing
 
 You are welcome to contribute to this project, just open a PR.
-### License
-
-- NestEvent is [MIT licensed](LICENSE).
