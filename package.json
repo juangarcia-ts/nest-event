@@ -2,8 +2,9 @@
   "name": "nest-event",
   "version": "1.0.8",
   "description": "Event handling with decorators for NestJS Framework",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
+    "postinstall": "npm run build",
     "test": "jest --notify --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --coverageDirectory=coverage",
@@ -32,8 +33,8 @@
   "homepage": "https://github.com/javascript-dragons/nest-event#readme",
   "dependencies": {
     "@nestjs-plus/discovery": "^2.0.2",
-    "@nestjs/common": "^6.7.2",
-    "@nestjs/core": "^6.7.2",
+    "@nestjs/common": "^7.6.5",
+    "@nestjs/core": "^7.6.5",
     "reflect-metadata": "^0.1.13",
     "strict-event-emitter-types": "^2.0.0"
   },
